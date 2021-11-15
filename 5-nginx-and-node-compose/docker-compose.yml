@@ -1,0 +1,18 @@
+
+version: '3'
+services:
+
+  backend:
+    # služba backend se buildí z ./backend
+    # je na síti mydockernetwork
+    # ...
+
+  nginx:
+    # služba nginx se buildí z ./nginx
+    # je na síti mydockernetwork
+    # má namapovaný port 80 na 80
+    # ...
+
+networks:
+  # vytvořit bridge mydockernetwork:
+  # ...

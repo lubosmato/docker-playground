@@ -1,0 +1,15 @@
+
+version: '3'
+services:
+
+  fast_compute_service:
+    # ...
+
+  image_service:
+    # ...
+
+  nginx:
+    # ...
+
+networks:
+  # ...
