@@ -1,0 +1,52 @@
+
+version: '3'
+services:
+
+  fast_compute_service:
+    build:
+      context: ./fast_compute_service
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    networks:
+      - mynetwork
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "2M"
+        max-file: "10"
+
+  image_service:
+    build:
+      context: ./image_service
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    depends_on:
+      - fast_compute_service
+    networks:
+      - mynetwork
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "2M"
+        max-file: "10"
+
+  nginx:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    depends_on:
+      - image_service
+    networks:
+      - mynetwork
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "2M"
+        max-file: "10"
+    ports:
+      - '80:80'
+
+networks:
+  mynetwork:
+    driver: bridge
